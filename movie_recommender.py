@@ -31,6 +31,4 @@ recent_movie_ratings = ratings[ratings['movieId'].isin(recent_movies['movieId'])
 duplicates = recent_movies[recent_movies.duplicated(subset='movieId')]
 duplicate_ratings = recent_movie_ratings[recent_movie_ratings.duplicated(subset=['userId','movieId'])]
 
-#want to look at most popular genre, movie with most reviews, ratio of rating by genre by quantity of movies
-#e.g. does more saturation in media = higher ratings?
-#then I would like to do some test cases of the recommender system
+
