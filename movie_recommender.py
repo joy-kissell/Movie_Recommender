@@ -43,7 +43,7 @@ genre_counts = genres.value_counts()
 #graphing
 plt.figure(figsize=(10,8))
 sns.barplot(x=genre_counts.index, y=genre_counts.values, palette='viridis')
-plt.title('Genres by Count')
+plt.title('Genres by Count (2020-2024)')
 plt.xlabel('Genres')
 plt.ylabel('Count')
 plt.xticks(rotation=45)
