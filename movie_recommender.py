@@ -33,12 +33,11 @@ duplicates = recent_movies[recent_movies.duplicated(subset='movieId')]
 duplicate_ratings = recent_movie_ratings[recent_movie_ratings.duplicated(subset=['userId','movieId'])]
 
 #removing movies that have 'no genres listed' as their only genre
-recent_movies = recent_movies[recent_movies['genres'] != 'no genres listed']
+recent_movies = recent_movies[recent_movies['genres'] != '(no genres listed)']
 recent_movie_ratings = recent_movie_ratings[recent_movie_ratings['movieId'].isin(recent_movies['movieId'])]
 
 #Genres by count (# of movies in each genre)
 genres = recent_movies['genres'].str.split('|').explode()
-print(genres.unique())
 genre_counts = genres.value_counts()
 
 #graphing
