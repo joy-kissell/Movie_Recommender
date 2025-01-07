@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
 import sklearn
-import seaborn
+import seaborn as sns
 import re
+import matplotlib.pyplot as plt
 
-movies = pd.read_csv('Movie_Recommender/ml-32m/movies.csv')
-ratings = pd.read_csv('Movie_Recommender/ml-32m/ratings.csv')
+movies = pd.read_csv('Movie_Recommender/movie_data/movies.csv')
+ratings = pd.read_csv('Movie_Recommender/movie_data/ratings.csv')
 
 def get_year(title):
     match = re.search(r'\((\d{4})\)', title)
@@ -32,3 +33,16 @@ duplicates = recent_movies[recent_movies.duplicated(subset='movieId')]
 duplicate_ratings = recent_movie_ratings[recent_movie_ratings.duplicated(subset=['userId','movieId'])]
 
 
+#Genres by count (# of movies in each genre)
+genres = recent_movies['genres'].str.split('|').explode()
+print(genres.unique())
+genre_counts = genres.value_counts()
+
+#graphing
+plt.figure(figsize=(10,8))
+sns.barplot(x=genre_counts.index, y=genre_counts.values, palette='viridis')
+plt.title('Genres by Count')
+plt.xlabel('Genres')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.show()
