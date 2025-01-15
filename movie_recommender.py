@@ -50,5 +50,11 @@ plt.xticks(rotation=45)
 plt.show()
 
 #movies with greatest number of ratings
-movie_ratings_count = recent_movie_ratings.groupby('movieId')['rating'].count().sort_values(ascending=False).head(5)
+movie_ratings_count = recent_movie_ratings.groupby('movieId')['rating'].count().sort_values(ascending=False)
 ratings_titles = recent_movies.set_index('movieId').loc[movie_ratings_count.index,'title']
+
+#movies with highest average rating
+highest_ratings = recent_movie_ratings.groupby('movieId')['rating'].mean().sort_values(ascending=False)
+highest_ratings_titles = recent_movies.set_index('movieId').loc[highest_ratings.index,'title']
+
+#graphing the top 5 movies by rating and number of ratings
