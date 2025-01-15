@@ -58,3 +58,17 @@ highest_ratings = recent_movie_ratings.groupby('movieId')['rating'].mean().sort_
 highest_ratings_titles = recent_movies.set_index('movieId').loc[highest_ratings.index,'title']
 
 #graphing the top 5 movies by rating and number of ratings
+fig, axes = plt.subplots(1,2, figsize=(15,6), sharey=True)
+sns.barplot(x=ratings_titles[:5], y=movie_ratings_count[:5], palette='Paired', ax=axes[0])
+axes[0].set_title('Top 5 Most Reviewed Movies (2020-2024)')
+axes[0].set_xlabel('Title')
+axes[0].set_ylabel('Number of Ratings')
+axes[0].tick_params(axis='x', rotation=45)
+
+sns.barplot(x=highest_ratings_titles[:5], y=highest_ratings[:5].values, palette='Paired', ax=axes[1])
+axes[1].set_title('Top 5 Highest Rated Movies (2020-2024)')
+axes[1].set_xlabel('Title')
+axes[1].tick_params(axis='x', rotation=45)
+
+plt.tight_layout()
+plt.show()
