@@ -48,3 +48,10 @@ plt.xlabel('Genres')
 plt.ylabel('Count')
 plt.xticks(rotation=45)
 plt.show()
+
+#movies with greatest number of ratings
+movie_ratings_count = recent_movie_ratings.groupby('movieId').value_counts().head(5)
+ratings_titles = recent_movies[recent_movies['movieId'].isin(movie_ratings_count.index)][['movieId', 'title']]
+
+#merging the 2 to plot
+movies_with_greatest_ratings = pd.merge(movie_ratings_count.rename('count'), left_on = 'movieId', right_index = True)
